@@ -1,11 +1,11 @@
-from algorithms import cifra_cesar
+from algorithms import CifraCesar
 
 def test_encrypt():
     entrada = "Exemplo de teste."
     shift = 3
     saida_esperada = "Hahpsor gh whvwh."
     
-    saida = cifra_cesar(entrada, shift, True)
+    saida = CifraCesar()(entrada, shift, True)
     
     assert saida_esperada == saida
     
@@ -15,6 +15,6 @@ def test_decrypt():
     shift = 3
     saida_esperada = "Exemplo de teste."
     
-    saida = cifra_cesar(entrada, shift, False)
+    saida = CifraCesar()(entrada, shift, False)
     
     assert saida_esperada == saida

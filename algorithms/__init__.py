@@ -1,1 +1,1 @@
-from algorithms.cifra_cesar import cifra_cesar
+from algorithms.cifra_cesar import CifraCesar
