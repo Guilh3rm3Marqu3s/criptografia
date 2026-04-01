@@ -19,4 +19,4 @@ jobs:
         pip install pytest customtkinter 
     - name: Run tests with pytest
       run: |
-        pytest
+        PYTHONPATH=${{ github.workspace }} pytest
