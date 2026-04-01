@@ -25,6 +25,6 @@ python3 main.py
 ## Exemplo
 
 <div align="center">
-  <video src="https://github.com/Guilh3rm3Marqu3s/criptografia/raw/refs/heads/main/assets/demo.mp4" width="700" autoplay loop muted>
+  <video src="https://github.com/Guilh3rm3Marqu3s/criptografia/raw/refs/heads/main/assets/demo.mp4" width="100%" autoplay loop muted playsinline>
   </video>
 </div>
