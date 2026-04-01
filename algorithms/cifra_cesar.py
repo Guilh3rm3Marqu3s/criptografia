@@ -3,13 +3,9 @@ from algorithms.core import Algorithm
 
 class CifraCesar(Algorithm):
     
-    @property
-    def nome(self):
-        return "Cifra de César"
-    @property
-    def desc(self):
-        return "Substituição monoalfabética que rotaciona as letras do alfabeto."
-    
+    NOME = "Cifra de César"
+    DESC = "Substituição monoalfabética que rotaciona as letras do alfabeto."
+
     def __call__(self, texto_entrada: str, shift: int, criptografar: bool = True, **kwargs):
         """
             Função que aplica a Cifra de César:

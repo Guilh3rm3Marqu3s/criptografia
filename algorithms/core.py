@@ -2,17 +2,11 @@ from abc import abstractmethod, ABC
 
 class Algorithm(ABC):
    
-    @property
-    @abstractmethod
-    def nome(self) -> str:
-        #Retorna o nome do algoritmo
-        pass
-    
-    @property
-    @abstractmethod
-    def desc(self) -> str:
-        # Retorna a descrição do algoritmo
-        pass
+    def __init_subclass__(cls, **kwargs):
+       super().__init_subclass__(**kwargs)
+       for attr in ['NOME', 'DESC']:
+            if not hasattr(cls, attr):
+                raise TypeError(f"A classe {cls.__name__} não definiu o atributo estático '{attr}'")
         
     @abstractmethod
     def __call__(self, texto_entrada, **kwargs):

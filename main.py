@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from screens import MenuScreen
+from screens.MenuPrincipal import MenuScreen
 
 
 class App(ctk.CTk):
