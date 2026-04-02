@@ -1,43 +1,20 @@
 import customtkinter as ctk
+from screens.BaseScreen import BaseScreen
 
-class RC4Frame(ctk.CTkFrame):
+class RC4Frame(BaseScreen):
     def __init__(self, master, cifra_class, callback_voltar):
-        super().__init__(master)
-        self.cifra_instancia = cifra_class() 
-        self.callback_voltar = callback_voltar
+        super().__init__(master, cifra_class(), callback_voltar)
 
-      
-        self.label_titulo = ctk.CTkLabel(self, text=self.cifra_instancia.NOME, font=("Arial", 24, "bold"))
-        self.label_titulo.pack(pady=(20, 5))
-        
-
-      
-        self.input_text = ctk.CTkTextbox(self, height=100)
-        self.input_text.pack(fill="x", padx=20, pady=10)
-        self.input_text.insert("0.0", "Digite sua mensagem aqui...")
+        self._build_input_common_components()
 
        
-        self.setup_controles()
+        self._build_particular_components()
 
       
-        self.output_text = ctk.CTkTextbox(self, height=100, state="disabled")
-        self.output_text.pack(fill="x", padx=20, pady=10)
-
-     
-        self.btn_container = ctk.CTkFrame(self, fg_color="transparent")
-        self.btn_container.pack(pady=20)
-
-        self.btn_voltar = ctk.CTkButton(self.btn_container, text="Voltar", command=self.callback_voltar, fg_color="gray30")
-        self.btn_voltar.pack(side="left", padx=10)
-
-        self.btn_executar = ctk.CTkButton(self.btn_container, text="Criptografar", command=self.processar)
-        self.btn_executar.pack(side="left", padx=10)
-        
-        self.btn_executar = ctk.CTkButton(self.btn_container, text="Descriptografar", command=lambda: self.processar(False))
-        self.btn_executar.pack(side="left", padx=10)
+        self._build_output_common_components()
         
 
-    def setup_controles(self):
+    def _build_particular_components(self):
         """Cria um novo campo de entrada para a Chave J do RC4"""
         frame_K = ctk.CTkFrame(self, fg_color="transparent")
         frame_K.pack(pady=10)
@@ -47,7 +24,7 @@ class RC4Frame(ctk.CTkFrame):
         self.entry_K.insert(0, "123")
         self.entry_K.pack(side="left")
 
-    def processar(self, criptografar: bool = True):
+    def _processar(self, criptografar: bool = True, **kwargs):
         self.output_text.configure(state="normal")
         texto_puro = self.input_text.get("1.0", "end-1c")
         K = self.entry_K.get()
@@ -64,11 +41,3 @@ class RC4Frame(ctk.CTkFrame):
         self.output_text.configure(state="disabled")
         
         
-    def _mostrar_erro(self, msg):
-        popup = ctk.CTkToplevel(self)
-        popup.title("Erro")
-        popup.geometry("300x150")
-        popup.grab_set()
-
-        ctk.CTkLabel(popup, text=msg, wraplength=260).pack(pady=20, padx=20)
-        ctk.CTkButton(popup, text="OK", command=popup.destroy).pack(pady=10)
