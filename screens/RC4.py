@@ -1,14 +1,16 @@
 import customtkinter as ctk
 
-class CesarFrame(ctk.CTkFrame):
+class RC4Frame(ctk.CTkFrame):
     def __init__(self, master, cifra_class, callback_voltar):
         super().__init__(master)
-        self.cifra_instancia = cifra_class() # Instancia a Cifra de César
+        self.cifra_instancia = cifra_class() 
         self.callback_voltar = callback_voltar
 
       
         self.label_titulo = ctk.CTkLabel(self, text=self.cifra_instancia.NOME, font=("Arial", 24, "bold"))
         self.label_titulo.pack(pady=(20, 5))
+        
+
       
         self.input_text = ctk.CTkTextbox(self, height=100)
         self.input_text.pack(fill="x", padx=20, pady=10)
@@ -36,31 +38,37 @@ class CesarFrame(ctk.CTkFrame):
         
 
     def setup_controles(self):
-        """Cria o seletor numérico para o Shift da Cifra de César"""
-        frame_shift = ctk.CTkFrame(self, fg_color="transparent")
-        frame_shift.pack(pady=10)
+        """Cria um novo campo de entrada para a Chave J do RC4"""
+        frame_K = ctk.CTkFrame(self, fg_color="transparent")
+        frame_K.pack(pady=10)
         
-        ctk.CTkLabel(frame_shift, text="Deslocamento (Shift):").pack(side="left", padx=5)
-        self.entry_shift = ctk.CTkEntry(frame_shift, width=50)
-        self.entry_shift.insert(0, "3")
-        self.entry_shift.pack(side="left")
+        ctk.CTkLabel(frame_K, text="Chave (máximo 256 caracteres):").pack(side="left", padx=5)
+        self.entry_K = ctk.CTkEntry(frame_K, width=300)
+        self.entry_K.insert(0, "123")
+        self.entry_K.pack(side="left")
 
     def processar(self, criptografar: bool = True):
         self.output_text.configure(state="normal")
         texto_puro = self.input_text.get("1.0", "end-1c")
-        
-        
+        K = self.entry_K.get()
+
         try:
-            val_shift = int(self.entry_shift.get())
-        except ValueError:
-            self.output_text.delete("1.0", "end")
-            self.output_text.insert("0.0", "ERRO: O Shift deve ser um número inteiro!")
+            resultado = self.cifra_instancia(texto_puro, K=K, criptografar=criptografar)
+        except Exception as ex:
+            self._mostrar_erro(str(ex))
+            self.output_text.configure(state="disabled")
             return
 
-        
-        resultado = self.cifra_instancia(texto_puro, shift=val_shift, criptografar=criptografar)
-
-       
         self.output_text.delete("1.0", "end")
         self.output_text.insert("0.0", resultado)
         self.output_text.configure(state="disabled")
+        
+        
+    def _mostrar_erro(self, msg):
+        popup = ctk.CTkToplevel(self)
+        popup.title("Erro")
+        popup.geometry("300x150")
+        popup.grab_set()
+
+        ctk.CTkLabel(popup, text=msg, wraplength=260).pack(pady=20, padx=20)
+        ctk.CTkButton(popup, text="OK", command=popup.destroy).pack(pady=10)
