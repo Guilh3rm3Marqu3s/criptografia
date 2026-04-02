@@ -31,3 +31,8 @@ python3 main.py
 </div>
 
 
+# Criptografias Disponíveis
+
+## [`Cifra de César`](algorithms/cifra_cesar.py)
+
+## [`RC4`](algorithms/rc4.py)
