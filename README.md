@@ -1,3 +1,6 @@
+
+
+
 # Sobre o Projeto
 ![CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.9+-yellow?style=for-the-badge&logo=python)
@@ -22,9 +25,9 @@ Após o término da instalação das dependências, execute o seguinte comando (
 python3 main.py
 ```
 
-## Exemplo
-
+## Funcionamento
 <div align="center">
-  <video src="https://github.com/Guilh3rm3Marqu3s/criptografia/raw/refs/heads/main/assets/demo.mp4" width="100%" autoplay loop muted playsinline>
-  </video>
+  <video src="https://github.com/user-attachments/assets/dfac2efb-430b-4642-b367-8b9690a40089" autoplay muted playsinline loop >      </video>
 </div>
+
+
