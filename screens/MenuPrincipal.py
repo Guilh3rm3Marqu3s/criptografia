@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from algorithms.core import Algorithm
-from screens import CesarFrame
+from screens import CesarFrame, RC4Frame
 class MenuScreen(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -15,10 +15,12 @@ class MenuScreen(ctk.CTkFrame):
         self.menu_options_frame.pack(side="left", fill="both", expand=True)
 
         # Frame que conterá uma breve descrição da técnica escolhida
-        self.desc_frame = ctk.CTkFrame(self, width=200)
-        self.desc_frame.pack(side="right", fill="both", expand=True)
-        self.label_desc = ctk.CTkLabel(self.desc_frame, text="Passe o mouse sobre um algoritmo para ver a descrição.", wraplength=180)
-        self.label_desc.pack(pady=20, padx=10)
+        self.desc_frame = ctk.CTkFrame(self, width=700)
+        
+        self.desc_frame.pack_propagate(False)
+        self.desc_frame.pack(side="right", fill="y")
+        self.label_desc = ctk.CTkLabel(self.desc_frame, text="Passe o mouse sobre um algoritmo para ver a descrição.", justify="left", wraplength=650 , anchor="nw")
+        self.label_desc.pack(pady=20, padx=10, fill="x", anchor="nw")
 
         self._load_options()
         
@@ -36,18 +38,20 @@ class MenuScreen(ctk.CTkFrame):
             
    
     def _on_enter(self, classe_cripto):
-        self.label_desc.configure(text=f"{classe_cripto.NOME}:\n\n{classe_cripto.DESC}") 
+        self.label_desc.configure(text=f"{classe_cripto.NOME}:\n\n{classe_cripto.DESC}", justify="left") 
         
     def _on_leave(self):
         self.label_desc.configure(text="Passe o mouse sobre um algoritmo para ver a descrição.")
     
     def _selecionar_criptografia(self, classe_cripto):
+        self._on_leave()
         self.pack_forget()
         if self.tela_cripto_ativa:
             self.tela_cripto_ativa.destroy()
             
         
         if classe_cripto.NOME == "Cifra de César": self.tela_cripto_ativa = CesarFrame(self.master, classe_cripto, self._voltar_ao_menu)
+        elif classe_cripto.NOME == "RC4": self.tela_cripto_ativa = RC4Frame(self.master, classe_cripto, self._voltar_ao_menu)
         self.tela_cripto_ativa.pack(fill="both", expand=True)
         
     def _voltar_ao_menu(self):
