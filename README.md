@@ -38,3 +38,5 @@ python3 main.py
 ## [`RC4`](algorithms/rc4.py)
 
 ## [`Salsa20`](algorithms/salsa20.py)
+
+## [`ChaCha20`](algorithms/chacha20.py)
