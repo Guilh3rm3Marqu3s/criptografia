@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from algorithms.core import Algorithm
-from screens import CesarFrame, RC4Frame
+from screens import CesarFrame, RC4Frame, Salsa20Frame
 class MenuScreen(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -52,6 +52,7 @@ class MenuScreen(ctk.CTkFrame):
         
         if classe_cripto.NOME == "Cifra de César": self.tela_cripto_ativa = CesarFrame(self.master, classe_cripto, self._voltar_ao_menu)
         elif classe_cripto.NOME == "RC4": self.tela_cripto_ativa = RC4Frame(self.master, classe_cripto, self._voltar_ao_menu)
+        elif classe_cripto.NOME == 'Salsa20': self.tela_cripto_ativa = Salsa20Frame(self.master, classe_cripto, self._voltar_ao_menu)
         self.tela_cripto_ativa.pack(fill="both", expand=True)
         
     def _voltar_ao_menu(self):
