@@ -36,3 +36,5 @@ python3 main.py
 ## [`Cifra de César`](algorithms/cifra_cesar.py)
 
 ## [`RC4`](algorithms/rc4.py)
+
+## [`Salsa20`](algorithms/salsa20.py)
