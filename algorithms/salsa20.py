@@ -90,18 +90,10 @@ class Salsa20(Algorithm):
         
     def _preparar_entrada(self, key, nonce):
         if isinstance(key, str):
-            try:
-                key = bytes.fromhex(key)
-            except ValueError:
-                key = key.encode('utf-8')
-        key = (key + b'\x00' * 32)[:32]
+            key = key.encode('utf-8')
 
         if isinstance(nonce, str):
-            try:
-                nonce = bytes.fromhex(nonce)
-            except ValueError:
-                nonce = nonce.encode('utf-8')
-        nonce = (nonce + b'\x00' * 8)[:8]
+            nonce = nonce.encode('utf-8')
 
         return key, nonce
         
